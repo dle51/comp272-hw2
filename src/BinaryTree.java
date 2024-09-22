@@ -1,6 +1,6 @@
 package src;
 /*
- * *** PLACE YOUR NAME / SECTION HERE ***
+ * *** Dan Le - COMP 272 001 ***
  *
  * Homework # 2 (Programming Assignment). This Java class defines a few basic
  * manipulation operations of a binary trees.
