@@ -242,8 +242,6 @@ public class BinaryTree {
 
         }
 
-        return;
-
     }
 
 
@@ -261,12 +259,31 @@ public class BinaryTree {
      * in very few lines of code.
      */
 
+    /*
+    int min = Integer.MAX_VALUE;
+    if node is in tree (not null)
+        min = Math.min(Integer.MAX_VALUE, node.data, minHelper(node.left), minHelper(node.right)) - min() method only takes 2 parameters, split to three methods
+
+    return min
+     */
+
     private int findMinHelper(Node node) {
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
 
-        return Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE;
+
+        if (node != null) {
+
+            min = node.data;
+            min = Math.min(min, findMinHelper(node.left));
+            min = Math.min(min, findMinHelper(node.right));
+
+        }
+
+        return min;
+
     }
 
 
@@ -283,15 +300,37 @@ public class BinaryTree {
      * in very few lines of code.
      */
 
+    /*
+    int count = -1;
+
+    if node is in tree (not null)
+        if node.data is larger than val
+            count += 2
+        count = count + nodesGT(left node) + nodesGT(right node)
+
+    return count
+
+     */
+
     private int nodesGTHelper(Node node, int val) {
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
 
-        // return -1; // RECALL, IF TREE IS EMPTY, RETURN -1
+        // return -1; // RECALL, IF TREE IS EMPTY, RETURN -1'
 
+        int count = -1;
 
-        return -1;
+        if (node != null) {
+
+            count = (node.data > val) ? 1 : 0;
+
+            count += Math.max(0, nodesGTHelper(node.left, val));
+            count += Math.max(0, nodesGTHelper(node.right, val));
+
+        }
+
+        return count;
     }
 
 
@@ -321,7 +360,7 @@ public class BinaryTree {
         return (double) sumAndCount[0] / sumAndCount[1];
     }
 
-    private int[] averageHelper(Node n) {
+    private int[] averageHelper(Node node) {
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
@@ -330,6 +369,20 @@ public class BinaryTree {
         // COUNT LOCATIONS IN THE RETURNED ARRAY AS SHOWN BELOW, ELSE
         // THE 'SUM' IS RETURNED IN INDEX LOCATION 0, AND COUNT IS LOCATION 1
 
-        return new int[]{0, 0};
+        int sum = 0;
+        int count = 0;
+
+        if (node != null) {
+
+            int[] left = averageHelper(node.left);
+            int[] right = averageHelper(node.right);
+
+            sum += left[0] + right[0] + node.data;
+            count += left[1] + right[1] + 1;
+
+        }
+
+        return new int[]{sum, count};
+
     }
 }
