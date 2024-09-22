@@ -221,23 +221,10 @@ public class BinaryTree {
      */
 
     /*
-    Cases:
-    node has left child: replaceValueHelper(left node, old value, new value)
-    node has right child: replaceValueHelper(right node, old value, new value)
-    Pseudocode
-    Node currentNode
-    if node is null:
-        currentNode = this.root
-    else:
-        currentNode = node
-    if currentNode.data == old value:
-        currentNode.data = new value
-    if currentNode.left != null:
-        replaceValueHelper(currentNode.left, old value, new value)
-    if currentNode.right != null:
-        replaceValueHelper(currentNode.right, old value, new value)
-
-    return
+    if the node given is in the tree ( not null )
+        if the value is the target value, set to new value
+        replace left child
+        replace right child
      */
 
     private void replaceValueHelper(Node node, int oldVal, int newVal) {
@@ -245,21 +232,14 @@ public class BinaryTree {
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
 
-        Node currentNode;
-        if (node == null) {
-            currentNode = this.root;
-        } else {
-            currentNode = node;
-        }
+        if (node != null) {
 
-        if (currentNode.data == oldVal) {
-            currentNode.data = newVal;
-        }
-        if (currentNode.left != null) {
-            replaceValueHelper(currentNode.left, oldVal, newVal);
-        }
-        if (currentNode.right != null) {
-            replaceValueHelper(currentNode.right, oldVal, newVal);
+            if (node.data == oldVal) {
+                node.data = newVal;
+            }
+            replaceValueHelper(node.left, oldVal, newVal);
+            replaceValueHelper(node.right, oldVal, newVal);
+
         }
 
         return;
